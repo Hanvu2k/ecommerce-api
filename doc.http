@@ -1,0 +1,106 @@
+# Auth ################################################################
+
+############################################
+# register
+POST http://localhost:5000/api/v1/auth/register
+Content-Type: application/json
+
+{
+    "fullName": "Hanvu",
+    "email": "hanvu1@gmail.com",
+    "password": "hanvu123456",
+    "phoneNumber": "0906146645"
+}
+
+############################################
+# login
+POST http://localhost:5000/api/v1/auth/login
+Content-Type: application/json
+
+{
+    "email": "hanvu1@gmail.com",
+    "password": "hanvu123456"
+}
+
+
+############################################
+# get me
+GET  http://localhost:5000/api/v1/auth/me
+
+Content-Type: application/json
+Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NGNhNmViY2I0NWYwMmY4MWJlZmJjNGIiLCJyb2xlIjowLCJpYXQiOjE2OTEwNTIzOTcsImV4cCI6MTY5MTEzODc5N30.FbEv-NXkQ9ZyQ7-_J-MpiaRdO0MPke23z1xnlqfh4Lc`
+
+
+
+# Category ################################################################
+
+############################################
+# create category
+POST http://localhost:5000/api/v1/category/create
+Content-Type: application/json
+
+{
+   "name":"Keyboard"
+}
+
+
+# product ################################################################
+
+############################################
+# get products
+GET  http://localhost:5000/api/v1/product/getAllProducts
+
+############################################
+# get product by category
+GET  http://localhost:5000/api/v1/product/getProductsByCategory?category=
+
+############################################
+# get product by id
+GET  http://localhost:5000/api/v1/product/getProductById/62ccd4665eefc71539bb6b4c
+
+############################################
+# get product trending
+GET  http://localhost:5000/api/v1/product/getProductsTrending
+
+############################################
+#   get Related Product
+GET  http://localhost:5000/api/v1/product/getRelatedProduct/62ccd4665eefc71539bb6b4c
+
+############################################
+#   search Product
+GET  http://localhost:5000/api/v1/product/searchProduct?searchTerm=ipad
+
+
+# cart ################################################################
+
+############################################
+# create cart
+POST http://localhost:5000/api/v1/cart/add
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NGNhNmViY2I0NWYwMmY4MWJlZmJjNGIiLCJyb2xlIjowLCJpYXQiOjE2OTEwNTIzOTcsImV4cCI6MTY5MTEzODc5N30.FbEv-NXkQ9ZyQ7-_J-MpiaRdO0MPke23z1xnlqfh4Lc
+
+{
+   "quantity":1,
+   "productId":"62ccd9eb5eefc71539bb6b54"
+}
+############################################
+# get cart
+GET  http://localhost:5000/api/v1/cart/getCart
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NGNhNmViY2I0NWYwMmY4MWJlZmJjNGIiLCJyb2xlIjowLCJpYXQiOjE2OTEwNTIzOTcsImV4cCI6MTY5MTEzODc5N30.FbEv-NXkQ9ZyQ7-_J-MpiaRdO0MPke23z1xnlqfh4Lc
+
+############################################
+# delete product
+DELETE   http://localhost:5000/api/v1/cart/delete?productId=
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NGNhNmViY2I0NWYwMmY4MWJlZmJjNGIiLCJyb2xlIjowLCJpYXQiOjE2OTEwNTIzOTcsImV4cCI6MTY5MTEzODc5N30.FbEv-NXkQ9ZyQ7-_J-MpiaRdO0MPke23z1xnlqfh4Lc
+
+############################################
+# update quantity product
+PATCH    http://localhost:5000/api/v1/cart/updateQuantity?productId=62ccd9eb5eefc71539bb6b54&incre=false
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NGNhNmViY2I0NWYwMmY4MWJlZmJjNGIiLCJyb2xlIjowLCJpYXQiOjE2OTEwNTIzOTcsImV4cCI6MTY5MTEzODc5N30.FbEv-NXkQ9ZyQ7-_J-MpiaRdO0MPke23z1xnlqfh4Lc
+
+
+# 62ccd9eb5eefc71539bb6b54
+
