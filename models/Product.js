@@ -14,7 +14,7 @@ const ProductSchema = new Schema(
       type: Number,
       require: true,
     },
-    photos: [{ type: String, require: true, max: 255 }],
+    photos: [{ type: String, max: 255 }],
     short_desc: {
       type: String,
       require: true,

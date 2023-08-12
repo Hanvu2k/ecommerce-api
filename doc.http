@@ -6,14 +6,24 @@ POST http://localhost:5000/api/v1/auth/register
 Content-Type: application/json
 
 {
-    "fullName": "Hanvu",
-    "email": "hanvu1@gmail.com",
+    "fullName": "Hanvu123",
+    "email": "hanvu123@gmail.com",
     "password": "hanvu123456",
     "phoneNumber": "0906146645"
 }
 
 ############################################
-# login
+# login admin
+POST http://localhost:5000/api/v1/auth/loginAdmin
+Content-Type: application/json
+
+{
+    "email": "hanvu@gmail.com",
+    "password": "hanvu123456"
+}
+############################################
+
+# login 
 POST http://localhost:5000/api/v1/auth/login
 Content-Type: application/json
 
@@ -28,9 +38,25 @@ Content-Type: application/json
 GET  http://localhost:5000/api/v1/auth/me
 
 Content-Type: application/json
-Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NGNhNmViY2I0NWYwMmY4MWJlZmJjNGIiLCJyb2xlIjowLCJpYXQiOjE2OTEwNTIzOTcsImV4cCI6MTY5MTEzODc5N30.FbEv-NXkQ9ZyQ7-_J-MpiaRdO0MPke23z1xnlqfh4Lc`
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NGNmM2JjYzRmZTkwNTY4YzBiMzliNGUiLCJyb2xlIjowLCJpYXQiOjE2OTEzMDYzMzgsImV4cCI6MTY5MTM5MjczOH0.YrjZLWRn_y8Ue-y6Kcn0nqFCiPd5xCfuPYN8fx8eFso-_J-MpiaRdO0MPke23z1xnlqfh4Lc
 
+############################################
+# get all user
+GET  http://localhost:5000/api/v1/auth/allUser
+Content-Type: application/json
+Authorization:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NGQxZDBiZDAzOTgyY2ZjYmJkNzU5MTUiLCJyb2xlIjoyLCJpYXQiOjE2OTE1MTM0MTMsImV4cCI6MTY5MTU5OTgxM30.Rg6gMYF8r0yqSQ5vl9X0aRX1n4fp9IyNi_bJlUHl16M
 
+############################################
+# update user
+
+PATCH   http://localhost:5000/api/v1/auth/updateRole
+Content-Type: application/json
+Authorization:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NGQ1ZTcyNjBkYmM1Njg1ZjUwYWNiYTMiLCJyb2xlIjoyLCJpYXQiOjE2OTE3NDcxMDEsImV4cCI6MTY5MTgzMzUwMX0.RvZr_E6iy8DlLmPRIaTwFL_cTxURIWPR9JwhGv6gQsE
+
+{
+    "userId":"64d5f308640420da82e03b52",
+    "role":1
+}
 
 # Category ################################################################
 
@@ -42,9 +68,48 @@ Content-Type: application/json
 {
    "name":"Keyboard"
 }
+############################################
+
+GET  http://localhost:5000/api/v1/category/getCategory
+Content-Type: application/json
+Authorization:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NGQxZDBiZDAzOTgyY2ZjYmJkNzU5MTUiLCJyb2xlIjoyLCJpYXQiOjE2OTE1MTM0MTMsImV4cCI6MTY5MTU5OTgxM30.Rg6gMYF8r0yqSQ5vl9X0aRX1n4fp9IyNi_bJlUHl16M
 
 
 # product ################################################################
+
+############################################
+# create products
+POST   http://localhost:5000/api/v1/product/createProduct
+Content-Type: application/json
+Authorization:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NGQxZDBiZDAzOTgyY2ZjYmJkNzU5MTUiLCJyb2xlIjoyLCJpYXQiOjE2OTE1MTM0MTMsImV4cCI6MTY5MTU5OTgxM30.Rg6gMYF8r0yqSQ5vl9X0aRX1n4fp9IyNi_bJlUHl16M
+{
+        "name": "Samsung",
+        "price":12000000,
+        "long_desc":"xinchaoasdfasf",
+        "short_desc":"cinsadfasdfasdfasdfa",
+        "category":"64ca7fd37b8ce7e4b9b5b492"
+}
+
+############################################
+# update products
+PATCH   http://localhost:5000/api/v1/product/updateProduct?productId=64d35dd17e52af9dab3dc31c
+Content-Type: application/json
+Authorization:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NGQxZDBiZDAzOTgyY2ZjYmJkNzU5MTUiLCJyb2xlIjoyLCJpYXQiOjE2OTE1MTM0MTMsImV4cCI6MTY5MTU5OTgxM30.Rg6gMYF8r0yqSQ5vl9X0aRX1n4fp9IyNi_bJlUHl16M
+
+{
+        "name": "Samsung12",
+        "price":12000000,
+        "long_desc":"xinchaoasdfasf",
+        "short_desc":"cinsadfasdfasdfasdfa",
+        "category":"64ca7fd37b8ce7e4b9b5b492"
+}
+
+############################################
+# delete products
+DELETE  http://localhost:5000/api/v1/product/deleteProduct?productId=64d34c858e98fd745d266d71
+Content-Type: application/json
+Authorization:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NGQxZDBiZDAzOTgyY2ZjYmJkNzU5MTUiLCJyb2xlIjoyLCJpYXQiOjE2OTE1MTM0MTMsImV4cCI6MTY5MTU5OTgxM30.Rg6gMYF8r0yqSQ5vl9X0aRX1n4fp9IyNi_bJlUHl16M
+
 
 ############################################
 # get products
@@ -71,13 +136,13 @@ GET  http://localhost:5000/api/v1/product/getRelatedProduct/62ccd4665eefc71539bb
 GET  http://localhost:5000/api/v1/product/searchProduct?searchTerm=ipad
 
 
-# cart ################################################################
+# CART ################################################################
 
 ############################################
-# create cart
+# add to  cart
 POST http://localhost:5000/api/v1/cart/add
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NGNhNmViY2I0NWYwMmY4MWJlZmJjNGIiLCJyb2xlIjowLCJpYXQiOjE2OTEwNTIzOTcsImV4cCI6MTY5MTEzODc5N30.FbEv-NXkQ9ZyQ7-_J-MpiaRdO0MPke23z1xnlqfh4Lc
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NGNmM2JjYzRmZTkwNTY4YzBiMzliNGUiLCJyb2xlIjowLCJpYXQiOjE2OTEzMDYzMzgsImV4cCI6MTY5MTM5MjczOH0.YrjZLWRn_y8Ue-y6Kcn0nqFCiPd5xCfuPYN8fx8eFso-_J-MpiaRdO0MPke23z1xnlqfh4Lc
 
 {
    "quantity":1,
@@ -87,20 +152,97 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NGNhNmViY
 # get cart
 GET  http://localhost:5000/api/v1/cart/getCart
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NGNhNmViY2I0NWYwMmY4MWJlZmJjNGIiLCJyb2xlIjowLCJpYXQiOjE2OTEwNTIzOTcsImV4cCI6MTY5MTEzODc5N30.FbEv-NXkQ9ZyQ7-_J-MpiaRdO0MPke23z1xnlqfh4Lc
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NGQwYTQ1NDRlNTVlYmNjNWI3YTZlNWEiLCJyb2xlIjowLCJpYXQiOjE2OTEzOTUxNzUsImV4cCI6MTY5MTQ4MTU3NX0.BuQgJbwjCPuel1e8-aWaXwa7T7gbxZWASvlYUHcWXz0
 
 ############################################
 # delete product
 DELETE   http://localhost:5000/api/v1/cart/delete?productId=
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NGNhNmViY2I0NWYwMmY4MWJlZmJjNGIiLCJyb2xlIjowLCJpYXQiOjE2OTEwNTIzOTcsImV4cCI6MTY5MTEzODc5N30.FbEv-NXkQ9ZyQ7-_J-MpiaRdO0MPke23z1xnlqfh4Lc
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NGNmM2JjYzRmZTkwNTY4YzBiMzliNGUiLCJyb2xlIjowLCJpYXQiOjE2OTEzMDYzMzgsImV4cCI6MTY5MTM5MjczOH0.YrjZLWRn_y8Ue-y6Kcn0nqFCiPd5xCfuPYN8fx8eFso-_J-MpiaRdO0MPke23z1xnlqfh4Lc
 
 ############################################
 # update quantity product
-PATCH    http://localhost:5000/api/v1/cart/updateQuantity?productId=62ccd9eb5eefc71539bb6b54&incre=false
+PATCH    http://localhost:5000/api/v1/cart/updateCart
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NGNhNmViY2I0NWYwMmY4MWJlZmJjNGIiLCJyb2xlIjowLCJpYXQiOjE2OTEwNTIzOTcsImV4cCI6MTY5MTEzODc5N30.FbEv-NXkQ9ZyQ7-_J-MpiaRdO0MPke23z1xnlqfh4Lc
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NGQwYTQ1NDRlNTVlYmNjNWI3YTZlNWEiLCJyb2xlIjowLCJpYXQiOjE2OTEzOTUxNzUsImV4cCI6MTY5MTQ4MTU3NX0.BuQgJbwjCPuel1e8-aWaXwa7T7gbxZWASvlYUHcWXz0
+
+{
+    "products": [
+        {
+        "img": "https://firebasestorage.googleapis.com/v0/b/funix-way.appspot.com/o/xSeries%2FCCDN%2FReactJS%2FAssignment_Images%2FASM03_Resources%2Fiphone_11_2.jpeg?alt=media&token=2e8b6c8e-56fa-4cfd-86c4-9be2ee6205e0",
+        "name": "Apple iPhone 11 64GB",
+        "price": 10999000,
+        "productId": "62ccd5755eefc71539bb6b4e",
+        "quantity": 5,
+        "total": 54995000
+    }
+    ],
+    "total": 54995000,
+    "_id": "64d0a4554e55ebcc5b7a6e5c"
+}
 
 
-# 62ccd9eb5eefc71539bb6b54
+# order ################################################################
+
+############################################
+POST  http://localhost:5000/api/v1/order/create
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NGQwYTQ1NDRlNTVlYmNjNWI3YTZlNWEiLCJyb2xlIjowLCJpYXQiOjE2OTEzOTUxNzUsImV4cCI6MTY5MTQ4MTU3NX0.BuQgJbwjCPuel1e8-aWaXwa7T7gbxZWASvlYUHcWXz0
+
+{
+      "name": "name",
+        "email": "email@gmail.com",
+        "phoneNumber": "0906146645",
+        "address": "address"
+}
+
+############################################
+GET   http://localhost:5000/api/v1/order/getOrder
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NGQwYTQ1NDRlNTVlYmNjNWI3YTZlNWEiLCJyb2xlIjowLCJpYXQiOjE2OTEzOTUxNzUsImV4cCI6MTY5MTQ4MTU3NX0.BuQgJbwjCPuel1e8-aWaXwa7T7gbxZWASvlYUHcWXz0
+
+############################################
+GET   http://localhost:5000/api/v1/order/getAllOrder
+Content-Type: application/json
+Authorization:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NGQxZDBiZDAzOTgyY2ZjYmJkNzU5MTUiLCJyb2xlIjoyLCJpYXQiOjE2OTE1NTIzODAsImV4cCI6MTY5MTYzODc4MH0.IYH8lF-dlqigZZkmFGg46CbYYhoEyS_-eHfM7bixO20
+
+############################################
+GET   http://localhost:5000/api/v1/order/getOrderDetail?orderId=64d0ec7da8b300db8d0343a0
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NGQxZDBiZDAzOTgyY2ZjYmJkNzU5MTUiLCJyb2xlIjoyLCJpYXQiOjE2OTE1MTM0MTMsImV4cCI6MTY5MTU5OTgxM30.Rg6gMYF8r0yqSQ5vl9X0aRX1n4fp9IyNi_bJlUHl16M
+# role ################################################################
+
+############################################
+POST    http://localhost:5000/api/v1/role/create
+Content-Type: application/json
+Authorization:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NGQxZDBiZDAzOTgyY2ZjYmJkNzU5MTUiLCJyb2xlIjoyLCJpYXQiOjE2OTE1MTM0MTMsImV4cCI6MTY5MTU5OTgxM30.Rg6gMYF8r0yqSQ5vl9X0aRX1n4fp9IyNi_bJlUHl16M
+{
+    "name":"counselor",
+    "level":1
+}
+############################################
+GET     http://localhost:5000/api/v1/role/getRole
+Content-Type: application/json
+Authorization:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NGQ1ZTcyNjBkYmM1Njg1ZjUwYWNiYTMiLCJyb2xlIjoyLCJpYXQiOjE2OTE3NDcxMDEsImV4cCI6MTY5MTgzMzUwMX0.RvZr_E6iy8DlLmPRIaTwFL_cTxURIWPR9JwhGv6gQsE
+
+##################  Message   ##########################
+############################################
+POST    http://localhost:5000/api/v1/message/send
+Content-Type: application/json
+Authorization:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NGQ1ZDUzYWMxNWNkODJhMjYxNWQ0ZjIiLCJyb2xlIjowLCJpYXQiOjE2OTE3MzUzNTQsImV4cCI6MTY5MTgyMTc1NH0.dLIvZZz93LSmHqvbOAa84XQodJFhibxc6tp5k-SdOYg
+
+{
+    "message":[
+        {"room":"64d5c8388723f170ba816eed",
+        "author":"hanvu1234",
+        "message":"hello",
+        "time":"12:00"
+        }
+    ]
+}
+
+############################################
+GET  http://localhost:5000/api/v1/message/getMessage
+Content-Type: application/json
+Authorization:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NGQ1ZDUzYWMxNWNkODJhMjYxNWQ0ZjIiLCJyb2xlIjowLCJpYXQiOjE2OTE3MzUzNTQsImV4cCI6MTY5MTgyMTc1NH0.dLIvZZz93LSmHqvbOAa84XQodJFhibxc6tp5k-SdOYg
 

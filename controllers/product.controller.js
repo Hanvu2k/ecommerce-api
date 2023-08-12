@@ -1,10 +1,4 @@
-const mongoose = require("mongoose");
-const UserModel = require("../models/User");
 const ProductModel = require("../models/Product");
-const validator = require("validator");
-const bcrypt = require("bcrypt");
-const jwt = require("jsonwebtoken");
-const Product = require("../models/Product");
 
 class ProductController {
   // get all products
@@ -126,6 +120,33 @@ class ProductController {
       return res.status(500).json({ error: error.message });
     }
   }
+  //   get product by id admin
+  async getProductByIdAdmin(req, res) {
+    const { productId } = req.params;
+
+    try {
+      const product = await ProductModel.findOne({ _id: productId });
+
+      if (!product)
+        return res
+          .status(422)
+          .json({ success: false, message: "Product not found!!" });
+
+      const formatedProduct = {
+        _id: product._id,
+        category: product.category,
+        long_desc: product.long_desc,
+        name: product.name,
+        short_desc: product.short_desc,
+        price: product.price,
+        photos: product.photos,
+      };
+
+      return res.status(200).json({ success: true, product: formatedProduct });
+    } catch (error) {
+      return res.status(500).json({ error: error.message });
+    }
+  }
 
   // get top trending products
   async getTrendingProducts(_req, res) {
@@ -232,6 +253,97 @@ class ProductController {
         success: true,
         message: "Search products success",
         products: formatedProduct,
+      });
+    } catch (error) {
+      return res.status(500).json({ error: error.message });
+    }
+  }
+
+  // create a new product
+  async createProduct(req, res) {
+    const { category, long_desc, short_desc, name, price } = req.body;
+    try {
+      const isExistProduct = await ProductModel.findOne({ name: name });
+
+      if (isExistProduct)
+        return res
+          .status(403)
+          .json({ success: false, message: "Product is exist!" });
+
+      const newProduct = await ProductModel.create({
+        name,
+        price,
+        long_desc,
+        short_desc,
+        category,
+      });
+
+      if (!newProduct)
+        return res
+          .status(403)
+          .json({ success: false, message: "Can't creat product" });
+
+      return res.status(201).json({
+        success: true,
+        message: "Product created successfully!",
+        product: newProduct,
+      });
+    } catch (error) {
+      return res.status(500).json({ error: error.message });
+    }
+  }
+
+  // delete a product
+  async deleteProduct(req, res) {
+    const { productId } = req.query;
+    try {
+      const product = await ProductModel.findById(productId);
+      if (!product)
+        return res
+          .status(403)
+          .json({ success: false, message: "Product is not exist!" });
+
+      await ProductModel.deleteOne({ _id: product._id });
+
+      return res
+        .status(200)
+        .json({ success: true, message: "Delete product success" });
+    } catch (error) {
+      return res.status(500).json({ error: error.message });
+    }
+  }
+
+  //update a product
+  async updateProduct(req, res) {
+    const { category, long_desc, short_desc, name, price } = req.body;
+    const { productId } = req.query;
+    try {
+      const product = await ProductModel.findOne({ _id: productId });
+      if (!product)
+        return res
+          .status(403)
+          .json({ success: "false", message: "Product is not exist!" });
+
+      const result = await ProductModel.findByIdAndUpdate(
+        { _id: product._id },
+        {
+          category,
+          long_desc,
+          short_desc,
+          name,
+          price,
+        },
+        { new: true }
+      );
+
+      if (!result)
+        return res
+          .status(403)
+          .json({ success: "false", message: "Can not update product!" });
+      return res.status(200).json({
+        success: true,
+        message: "Updated product successfully",
+        product: result,
       });
     } catch (error) {
       return res.status(500).json({ error: error.message });

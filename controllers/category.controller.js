@@ -1,10 +1,4 @@
-const mongoose = require("mongoose");
-const UserModel = require("../models/User");
-const ProductModel = require("../models/Product");
 const CategoryModel = require("../models/Category");
-const validator = require("validator");
-const bcrypt = require("bcrypt");
-const jwt = require("jsonwebtoken");
 
 class CategoryController {
   //   create a new category
@@ -24,6 +18,26 @@ class CategoryController {
         success: true,
         message: "Category created successfully!",
         category: newCategory,
+      });
+    } catch (error) {
+      return res.status(500).json({ error: error.message });
+    }
+  }
+
+  // get all categories
+  async getCategories(_req, res) {
+    try {
+      const categories = await CategoryModel.find();
+
+      if (categories.length === 0)
+        return res
+          .status(403)
+          .json({ success: false, message: "Can't get categories" });
+
+      return res.status(200).json({
+        success: true,
+        message: "Get categories successfully!",
+        category: categories,
       });
     } catch (error) {
       return res.status(500).json({ error: error.message });

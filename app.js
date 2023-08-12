@@ -1,9 +1,13 @@
 require("dotenv").config();
-
 const express = require("express");
 const route = require("./routes");
 const cors = require("cors");
 const http = require("http");
+const { init } = require("./socket");
+
+const bodyParser = require("body-parser");
+const cookieParser = require("cookie-parser");
+const session = require("express-session");
 
 const { connect } = require("./config/db");
 
@@ -17,6 +21,22 @@ const corsOptions = {
 const app = express();
 const server = http.createServer(app);
 const port = process.env.PORT || 8080;
+init(server);
+
+app.use(cookieParser());
+app.use(bodyParser.urlencoded({ extended: true }));
+
+app.use(
+  session({
+    key: "jwt",
+    secret: "subscribe",
+    resave: false,
+    saveUninitialized: false,
+    cookie: {
+      maxAge: 24 * 60 * 60 * 1000,
+    },
+  })
+);
 
 app.use(express.json({ limit: "50mb" }));
 app.use(express.urlencoded({ limit: "50mb", extended: true }));
