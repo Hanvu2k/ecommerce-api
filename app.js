@@ -4,6 +4,7 @@ const route = require("./routes");
 const cors = require("cors");
 const http = require("http");
 const { init } = require("./socket");
+const helmet = require("helmet");
 
 const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
@@ -23,6 +24,7 @@ const server = http.createServer(app);
 const port = process.env.PORT || 8080;
 init(server);
 
+app.use(helmet());
 app.use(cookieParser());
 app.use(bodyParser.urlencoded({ extended: true }));
 
