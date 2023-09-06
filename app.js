@@ -14,7 +14,7 @@ const { connect } = require("./config/db");
 
 const methods = ["GET", "POST", "PATCH", "DELETE"];
 const corsOptions = {
-  origin: ["https://ecommerce-server-hqbv.onrender.com"],
+  origin: ["https://apple.learn-it.site"],
   methods: methods,
   credentials: true,
 };
