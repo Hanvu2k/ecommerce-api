@@ -14,7 +14,7 @@ const { connect } = require("./config/db");
 
 const methods = ["GET", "POST", "PATCH", "DELETE"];
 const corsOptions = {
-  origin: "*",
+  origin: ["https://ecommerce-server-hqbv.onrender.com"],
   methods: methods,
   credentials: true,
 };
