@@ -14,7 +14,7 @@ const { connect } = require("./config/db");
 
 const methods = ["GET", "POST", "PATCH", "DELETE"];
 const corsOptions = {
-  origin:"*",
+  origin:["https://apple.learn-it.site", "http://localhost:3001", "http://localhost:3000"],
   methods: methods,
   credentials: true,
 };
