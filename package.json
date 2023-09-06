@@ -9,6 +9,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start-server": "node app.js",
+    "build":"npm i",
     "start": "nodemon app.js"
   },
   "author": "hanvu2k",
