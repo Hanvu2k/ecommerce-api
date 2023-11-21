@@ -14,7 +14,7 @@ const { connect } = require("./config/db");
 
 const methods = ["GET", "POST", "PATCH", "DELETE"];
 const corsOptions = {
-  origin:["https://apple.learn-it.site", "http://localhost:3001", "http://localhost:3000", "https://frolicking-bavarois-b40d71.netlify.app"],
+  origin:["https://apple.learn-it.site", "http://localhost:3001", "http://localhost:3000", "https://frolicking-bavarois-b40d71.netlify.app","https://apple-e.netlify.app"],
   methods: methods,
   credentials: true,
 };
